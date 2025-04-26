@@ -1,0 +1,1 @@
+M-Git (Mini git) - Simple git for learning git internals and for having fun :D
