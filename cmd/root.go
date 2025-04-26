@@ -3,6 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"log"
+	initcmd "mgit/cmd/init"
 )
 
 func NewRootCommand() *cobra.Command {
@@ -15,5 +16,7 @@ func NewRootCommand() *cobra.Command {
 			}
 		},
 	}
+
+	rootCmd.AddCommand(initcmd.NewInitCommand())
 	return rootCmd
 }
