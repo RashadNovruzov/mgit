@@ -3,6 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"log"
+	"mgit/cmd/catfile"
 	"mgit/cmd/hashobject"
 	initcmd "mgit/cmd/init"
 )
@@ -20,5 +21,6 @@ func NewRootCommand() *cobra.Command {
 
 	rootCmd.AddCommand(initcmd.NewInitCommand())
 	rootCmd.AddCommand(hashobject.NewHashObjectCmd())
+	rootCmd.AddCommand(catfile.NewCatFileCmd())
 	return rootCmd
 }
