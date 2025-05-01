@@ -1,15 +1,13 @@
 package main
 
 import (
-	"log"
 	"mgit/cmd"
+	"mgit/utils"
 )
 
 func main() {
 	rootCmd := cmd.NewRootCommand()
 
 	err := rootCmd.Execute()
-	if err != nil {
-		log.Fatal(err)
-	}
+	utils.CheckErr(err)
 }

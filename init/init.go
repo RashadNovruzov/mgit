@@ -2,13 +2,14 @@ package init
 
 import (
 	"log"
+	"mgit/utils"
 	"os"
 )
 
 func InitializeRepo() {
 	err := os.Mkdir(".mgit", 0755)
-	if err != nil {
-		log.Fatal("Error while initializing repository", err)
-	}
+	utils.CheckErr(err)
+	err = os.Mkdir(".mgit/objects", 0755)
+	utils.CheckErr(err)
 	log.Println("Initialized git repository")
 }
