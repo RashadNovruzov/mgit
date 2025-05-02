@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var IGNORED_PATHS = []string{".git", ".hg", ".svn", ".mgit", ".idea"}
+var IgnoredPaths = []string{".git", ".hg", ".svn", ".mgit", ".idea"}
 
 type Entry struct {
 	Name       string
@@ -22,7 +22,7 @@ func WriteTree(folderPath string) string {
 	var hashedEntries []Entry
 
 	if len(folderPath) == 0 {
-		folderPath = constants.DEFAULT_FOLDER_PATH
+		folderPath = constants.DefaultFolderPath
 	}
 	entries, err := os.ReadDir(folderPath)
 	utils.CheckErr(err)
@@ -50,7 +50,7 @@ func WriteTree(folderPath string) string {
 	}
 	tree := builder.String()
 	oidTree := utils.HashData([]byte(tree), objectType)
-	utils.CreateFile(constants.DEFAULT_MGIT_PATH+oidTree, []byte(tree))
+	utils.CreateFile(constants.DefaultMgitPath+oidTree, []byte(tree))
 
 	return oidTree
 }
@@ -58,7 +58,7 @@ func WriteTree(folderPath string) string {
 func isIgnored(path string) bool {
 	parts := strings.Split(filepath.ToSlash(path), "/")
 	for _, part := range parts {
-		for _, ignored := range IGNORED_PATHS {
+		for _, ignored := range IgnoredPaths {
 			if strings.HasPrefix(part, ignored) {
 				return true
 			}
