@@ -12,7 +12,7 @@ func NewHashObjectCmd() *cobra.Command {
 		Short: "hashes and saves object to .mgit folder",
 		Long:  `hashes and saves object to .mgit folder`,
 		Run: func(cmd *cobra.Command, args []string) {
-			hashobject.HashObject(args[0])
+			hashobject.HashObject(args[0], "")
 		},
 	}
 	return cmd
