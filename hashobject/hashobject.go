@@ -1,31 +1,18 @@
 package hashobject
 
 import (
-	"crypto/sha1"
-	"encoding/hex"
+	"log"
+	"mgit/constants"
 	"mgit/utils"
-	"os"
 )
 
-func HashObject(filePath string, typeOfObj string) {
-	if typeOfObj == "" {
-		typeOfObj = "blob"
+func HashObject(filePath string, objectType string) string {
+	if objectType == "" {
+		objectType = "blob"
 	}
-	data := readFile(filePath)
-	obj := append([]byte(typeOfObj), 0x00)
-	obj = append(obj, data...)
-	hash := sha1.New()
-	hash.Write(obj)
-	hashedString := hex.EncodeToString(hash.Sum(nil))
-	createFile(hashedString, obj)
-}
-
-func createFile(hashedString string, data []byte) {
-	utils.CheckErr(os.WriteFile(".mgit/objects/"+hashedString, data, 0644))
-}
-
-func readFile(filePath string) []byte {
-	file, err := os.ReadFile(filePath)
-	utils.CheckErr(err)
-	return file
+	data := utils.ReadFile(filePath)
+	oid := utils.HashData(data, objectType)
+	utils.CreateFile(constants.DEFAULT_MGIT_PATH+oid, data)
+	log.Println("File ", filePath, " saved with hash ", oid)
+	return oid
 }

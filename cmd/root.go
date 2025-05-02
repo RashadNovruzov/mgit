@@ -6,6 +6,7 @@ import (
 	"mgit/cmd/catfile"
 	"mgit/cmd/hashobject"
 	initcmd "mgit/cmd/init"
+	"mgit/cmd/writetree"
 )
 
 func NewRootCommand() *cobra.Command {
@@ -22,5 +23,6 @@ func NewRootCommand() *cobra.Command {
 	rootCmd.AddCommand(initcmd.NewInitCommand())
 	rootCmd.AddCommand(hashobject.NewHashObjectCmd())
 	rootCmd.AddCommand(catfile.NewCatFileCmd())
+	rootCmd.AddCommand(writetree.NewWriteTreeCmd())
 	return rootCmd
 }
