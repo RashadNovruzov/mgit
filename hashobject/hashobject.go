@@ -11,7 +11,7 @@ func HashObject(filePath string, objectType string) string {
 		objectType = "blob"
 	}
 	data := utils.ReadFile(filePath)
-	oid := utils.HashData(data, objectType)
+	oid, data := utils.HashData(data, objectType)
 	utils.CreateFile(constants.DefaultMgitPath+oid, data)
 	log.Println("File ", filePath, " saved with hash ", oid)
 	return oid

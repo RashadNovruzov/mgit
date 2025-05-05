@@ -4,22 +4,15 @@ import (
 	"fmt"
 	"mgit/constants"
 	"mgit/hashobject"
+	"mgit/models"
 	"mgit/utils"
 	"os"
 	"path/filepath"
 	"strings"
 )
 
-var IgnoredPaths = []string{".git", ".hg", ".svn", ".mgit", ".idea"}
-
-type Entry struct {
-	Name       string
-	Oid        string
-	ObjectType string
-}
-
 func WriteTree(folderPath string) string {
-	var hashedEntries []Entry
+	var hashedEntries []models.TreeEntry
 
 	if len(folderPath) == 0 {
 		folderPath = constants.DefaultFolderPath
@@ -41,7 +34,7 @@ func WriteTree(folderPath string) string {
 			objectType = "blob"
 			oid = hashobject.HashObject(fullPath, objectType)
 		}
-		hashedEntries = append(hashedEntries, Entry{entry.Name(), oid, objectType})
+		hashedEntries = append(hashedEntries, models.TreeEntry{Name: entry.Name(), Oid: oid, ObjectType: objectType})
 	}
 
 	var builder strings.Builder
@@ -49,8 +42,8 @@ func WriteTree(folderPath string) string {
 		builder.WriteString(fmt.Sprintf("%s %s %s\n", entry.ObjectType, entry.Oid, entry.Name))
 	}
 	tree := builder.String()
-	oidTree := utils.HashData([]byte(tree), objectType)
-	utils.CreateFile(constants.DefaultMgitPath+oidTree, []byte(tree))
+	oidTree, data := utils.HashData([]byte(tree), "tree")
+	utils.CreateFile(constants.DefaultMgitPath+oidTree, data)
 
 	return oidTree
 }
@@ -58,7 +51,7 @@ func WriteTree(folderPath string) string {
 func isIgnored(path string) bool {
 	parts := strings.Split(filepath.ToSlash(path), "/")
 	for _, part := range parts {
-		for _, ignored := range IgnoredPaths {
+		for _, ignored := range constants.IgnoredPaths {
 			if strings.HasPrefix(part, ignored) {
 				return true
 			}
