@@ -21,5 +21,6 @@ func NewRootCommand() *cobra.Command {
 	rootCmd.AddCommand(NewCatFileCmd())
 	rootCmd.AddCommand(NewWriteTreeCmd())
 	rootCmd.AddCommand(NewReadTreeCmd())
+	rootCmd.AddCommand(NewCommitCommand())
 	return rootCmd
 }
