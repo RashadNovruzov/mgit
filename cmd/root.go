@@ -23,6 +23,6 @@ func NewRootCommand() *cobra.Command {
 	rootCmd.AddCommand(NewReadTreeCmd())
 	rootCmd.AddCommand(NewCommitCommand())
 	rootCmd.AddCommand(NewLogCommand())
-
+	rootCmd.AddCommand(NewCheckoutCmd())
 	return rootCmd
 }
