@@ -20,26 +20,26 @@ func Commit(message string) string {
 	}
 	commit = commit + "\n" + message
 	oid, commitBytes := utils.HashData([]byte(commit), "commit")
-	utils.CreateFile(constants.DefaultMgitPath+oid, commitBytes)
+	utils.CreateFile(constants.DefaultMgitObjectsPath+oid, commitBytes)
 	SetHead(oid)
 	return oid
 }
 
 func SetHead(oid string) {
-	utils.CreateFile(constants.DefaultMgitPath+"HEAD", []byte(oid))
+	utils.CreateFile(constants.DefaultMgitObjectsPath+"HEAD", []byte(oid))
 }
 
 func GetHead() string {
-	_, err := os.Stat(constants.DefaultMgitPath + "HEAD")
+	_, err := os.Stat(constants.DefaultMgitObjectsPath + "HEAD")
 	if err != nil {
 		return ""
 	}
-	return string(utils.ReadFile(constants.DefaultMgitPath + "HEAD"))
+	return string(utils.ReadFile(constants.DefaultMgitObjectsPath + "HEAD"))
 }
 
 func GetCommit(oid string) (*models.Commit, error) {
 
-	commitBytes := utils.ReadFile(constants.DefaultMgitPath + oid)
+	commitBytes := utils.ReadFile(constants.DefaultMgitObjectsPath + oid)
 	commitString := string(bytes.SplitN(commitBytes, []byte{0x00}, 2)[1])
 
 	var commit models.Commit

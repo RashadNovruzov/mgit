@@ -8,7 +8,7 @@ import (
 )
 
 func CatFile(oid string, typeOfObj string) string {
-	obj := utils.ReadFile(constants.DefaultMgitPath + oid)
+	obj := utils.ReadFile(constants.DefaultMgitObjectsPath + oid)
 	parts := bytes.SplitN(obj, []byte{0x00}, 2)
 	if len(parts) != 2 {
 		log.Fatal("invalid object format: no null byte")

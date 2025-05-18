@@ -24,5 +24,7 @@ func NewRootCommand() *cobra.Command {
 	rootCmd.AddCommand(NewCommitCommand())
 	rootCmd.AddCommand(NewLogCommand())
 	rootCmd.AddCommand(NewCheckoutCmd())
+	rootCmd.AddCommand(NewTagCommand())
+
 	return rootCmd
 }

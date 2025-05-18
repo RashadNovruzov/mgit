@@ -43,7 +43,7 @@ func WriteTree(folderPath string) string {
 	}
 	tree := builder.String()
 	oidTree, data := utils.HashData([]byte(tree), "tree")
-	utils.CreateFile(constants.DefaultMgitPath+oidTree, data)
+	utils.CreateFile(constants.DefaultMgitObjectsPath+oidTree, data)
 
 	return oidTree
 }

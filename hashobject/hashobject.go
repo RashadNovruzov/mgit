@@ -12,7 +12,7 @@ func HashObject(filePath string, objectType string) string {
 	}
 	data := utils.ReadFile(filePath)
 	oid, data := utils.HashData(data, objectType)
-	utils.CreateFile(constants.DefaultMgitPath+oid, data)
+	utils.CreateFile(constants.DefaultMgitObjectsPath+oid, data)
 	log.Println("File ", filePath, " saved with hash ", oid)
 	return oid
 }

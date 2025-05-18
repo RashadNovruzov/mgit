@@ -1,8 +1,10 @@
 package constants
 
 const (
-	DefaultFolderPath = "."
-	DefaultMgitPath   = ".mgit/objects/"
+	DefaultFolderPath      = "."
+	DefaultMgitObjectsPath = ".mgit/objects/"
+	DefaultMgitPath        = ".mgit/"
+	DefaultRefsFolder      = "refs/tags/"
 )
 
 var IgnoredPaths = []string{".git", ".hg", ".svn", ".mgit", ".idea", "mgit.exe"}
