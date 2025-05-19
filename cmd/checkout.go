@@ -11,7 +11,7 @@ func NewCheckoutCmd() *cobra.Command {
 		Args:  cobra.ExactArgs(1),
 		Short: "Checkout to commit by oid",
 		Run: func(cmd *cobra.Command, args []string) {
-			oid := args[0]
+			oid := getOid(args[0])
 			checkout.Checkout(oid)
 		},
 	}

@@ -7,6 +7,9 @@ func CreateFile(path string, data []byte) {
 }
 
 func ReadFile(filePath string) []byte {
+	if _, err := os.Stat(filePath); os.IsNotExist(err) {
+		return nil
+	}
 	file, err := os.ReadFile(filePath)
 	CheckErr(err)
 	return file

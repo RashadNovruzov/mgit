@@ -3,6 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"log"
+	"mgit/tag"
 )
 
 func NewRootCommand() *cobra.Command {
@@ -27,4 +28,12 @@ func NewRootCommand() *cobra.Command {
 	rootCmd.AddCommand(NewTagCommand())
 
 	return rootCmd
+}
+
+func getOid(name string) string {
+	ref := tag.GetRef(name)
+	if ref == "" {
+		ref = name
+	}
+	return ref
 }

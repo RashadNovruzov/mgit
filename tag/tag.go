@@ -20,7 +20,10 @@ func UpdateRef(ref string, oid string) {
 }
 
 func GetRef(ref string) string {
-	refPath := constants.DefaultMgitPath + ref
+	refPath := constants.DefaultMgitPath + constants.DefaultRefsFolder + ref
 	fileData := utils.ReadFile(refPath)
+	if fileData == nil {
+		return ""
+	}
 	return string(fileData)
 }

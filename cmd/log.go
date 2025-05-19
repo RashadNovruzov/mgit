@@ -13,8 +13,9 @@ func NewLogCommand() *cobra.Command {
 		Run: func(cmd *cobra.Command, args []string) {
 			commitOid := ""
 			if len(args) != 0 {
-				commitOid = args[0]
+				commitOid = getOid(args[0])
 			}
+
 			log.PrintLog(commitOid)
 		},
 	}

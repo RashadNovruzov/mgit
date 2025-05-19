@@ -11,7 +11,8 @@ func NewReadTreeCmd() *cobra.Command {
 		Args:  cobra.ExactArgs(1),
 		Short: "read-tree of mgit repo and apply changes",
 		Run: func(cmd *cobra.Command, args []string) {
-			readtree.ReadTree(args[0])
+			oid := getOid(args[0])
+			readtree.ReadTree(oid)
 		},
 	}
 
